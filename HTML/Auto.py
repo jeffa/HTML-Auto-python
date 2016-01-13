@@ -33,5 +33,5 @@ class Tag:
         self.hash   = hash
         self.sorted = sorted
 
-    def tag( params={} ):
+    def tag( self, params={} ):
         return "<html />"
