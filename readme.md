@@ -1,4 +1,4 @@
-HTML-AutoTag (python)
+HTML-Auto (python)
 =====================
 Just another HTML tag generator for Python.
 
@@ -9,7 +9,10 @@ Generate HTML tags with ease (HTML4, HTML5, XHTML and SVG).
 Synopsis
 --------
 ```python
-import HTML.AutoTag
+from HTML.Auto import Tag
+
+auto = Tag()
+print( auto.tag() )
 ```
 
 Installation

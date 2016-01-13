@@ -7,7 +7,7 @@ setup(
     description='Just another HTML tag generator (for Python)',
     author='Jeff Anderson',
     author_email='jeffa@cpan.org',
-    url='https://github.com/jeffa/HTML-Auto',
+    url='https://github.com/jeffa/HTML-Auto-python',
     license='MIT',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     classifiers=[
