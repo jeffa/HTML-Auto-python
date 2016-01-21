@@ -11,7 +11,16 @@ class Tag:
         self.newline = "\n"              if 'indent'  in params else ''
 
     def tag( self, params={} ):
-        return "<html />"
+
+        # empty tag
+        if 'cdata' not in params or not params['cdata']:
+            return "<html />"
+
+        tag   = params['tag']
+        cdata = params['cdata']
+        attr  = params['attr'] if 'attr' in params else {}
+
+        return '<' + tag + '>' + cdata + '</' + tag + '>'
 
 
 class Attr:
