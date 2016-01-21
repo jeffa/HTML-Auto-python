@@ -12,7 +12,7 @@ Synopsis
 from HTML.Auto import Tag
 
 auto = Tag()
-print( auto.tag() )
+print( auto.tag({ 'tag': 'li', 'cdata': 'item', 'attr': { 'class': 'foo' } }) )
 ```
 
 Installation
