@@ -18,7 +18,7 @@ class Tag:
         cdata = params['cdata'] if 'cdata' in params else ''
         attr  = params['attr']  if 'attr'  in params else {}
 
-        if not type( attr ) == 'Attr':
+        if not type( attr ) is 'Attr':
             attr = Attr( attr, self.sort )
 
         # empty tag
