@@ -3,12 +3,11 @@ __version__='0.0.1'
 class Tag:
 
     def __init__( self, params={} ):
-
-        self.encodes = params['encodes'] if 'encodes' in params else ''
+        self.encodes = 1                 if 'encodes' in params else 0
+        self.sort    = 1                 if 'sort'    in params else 0
+        self.level   = params['level']   if 'level'   in params else 0
         self.encode  = params['encode']  if 'encode'  in params else ''
         self.indent  = params['indent']  if 'indent'  in params else ''
-        self.level   = params['level']   if 'level'   in params else ''
-        self.sort    = params['sort']    if 'sort'    in params else ''
         self.newline = "\n"              if 'indent'  in params else ''
 
     def tag( self, params={} ):
