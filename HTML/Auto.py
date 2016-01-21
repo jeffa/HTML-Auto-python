@@ -1,8 +1,23 @@
 __version__='0.0.1'
 
+class Tag:
+
+    def __init__( self, params={} ):
+
+        self.encodes = params['encodes'] if 'encodes' in params else ''
+        self.encode  = params['encode']  if 'encode'  in params else ''
+        self.indent  = params['indent']  if 'indent'  in params else ''
+        self.level   = params['level']   if 'level'   in params else ''
+        self.sort    = params['sort']    if 'sort'    in params else ''
+        self.newline = "\n"              if 'indent'  in params else ''
+
+    def tag( self, params={} ):
+        return "<html />"
+
+
 class Attr:
 
-    def __init__( self, hash={}, sorted=0 ):
+    def __init__( self, params={} ):
         self.hash   = hash
         self.sorted = sorted
 
@@ -26,12 +41,3 @@ class Attr:
     def stringify( self, hash ):
         # do the things
         return "do the things!"
-
-class Tag:
-
-    def __init__( self, hash={}, sorted=0 ):
-        self.hash   = hash
-        self.sorted = sorted
-
-    def tag( self, params={} ):
-        return "<html />"
