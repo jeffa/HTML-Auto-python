@@ -1,3 +1,4 @@
+import re
 from cgi import escape
 
 __version__='0.0.1'
@@ -39,18 +40,25 @@ class Attr:
         return str
 
     def key( self, str ):
-        # scrub key
+        str = re.sub( '\s+', '', str )
+        str = re.sub( '["\'>=\/]', '', str )
         return str
 
     def val( self, str ):
         # scrub value
+        if re.match( '^\s+$', str ):
+            return ''
+
+        str = re.sub( '"', '', str )
         return str
 
     def rotate( self, array ):
-        str = "rotate" # shift array
-        #array.push( val )
-        return str
+        val = array.pop(0)
+        array.append( val )
+        return val
 
     def stringify( self, hash ):
         # do the things
         return "do the things!"
+
+
