@@ -28,15 +28,15 @@ class TestTags(unittest.TestCase):
 
     def test_simple_autos(self):
         auto = Attr( { 'foo': 'bar', 'baz': 'qux' }, 1 )
-        self.assertEqual( auto.__str__(), ' baz="qux" foo="bar"',   "correct simple autos" )
+        self.assertEqual( str( auto ), ' baz="qux" foo="bar"',   "correct simple autos" )
 
-#    def test_rotate_autos(self):
-#        auto = Attr( { 'foo': ['bar','baz','qux'], 'baz': ['foo','qux'] }, 1 )
-#        self.assertEqual( auto.__str__(), ' baz="foo" foo="bar"',          "correct rotate autos 1" )
-#        self.assertEqual( ' baz="qux" foo="baz"', auto.__str__(),          "correct rotate autos 2" )
-#        self.assertEqual( ' baz="foo" foo="qux"', auto.__str__(),          "correct rotate autos 3" )
-#        self.assertEqual( ' baz="qux" foo="bar"', auto.__str__(),          "correct rotate autos 4" )
-#        self.assertEqual( ' baz="foo" foo="baz"', auto.__str__(),          "correct rotate autos 5" )
+    def test_rotate_autos(self):
+        auto = Attr( { 'foo': ['bar','baz','qux'], 'baz': ['foo','qux'] }, 1 )
+        self.assertEqual( str( auto ), ' baz="foo" foo="bar"',          "correct rotate autos 1" )
+        self.assertEqual( str( auto ), ' baz="qux" foo="baz"',          "correct rotate autos 2" )
+        self.assertEqual( str( auto ), ' baz="foo" foo="qux"',          "correct rotate autos 3" )
+        self.assertEqual( str( auto ), ' baz="qux" foo="bar"',          "correct rotate autos 4" )
+        self.assertEqual( str( auto ), ' baz="foo" foo="baz"',          "correct rotate autos 5" )
 #
 #    def test_nested_autos(self):
 #        auto = Attr( { 'foo': { 'bar': 'baz', 'qux': 'foo' } }, 1 )

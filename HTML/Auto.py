@@ -42,8 +42,8 @@ class Attr:
         for key in keys:
             if not key in seen:
                 val = self.params[key]
-                val = stringify( val ) if type( val ) is 'dict' else val
-                val = rotate( val )    if type( val ) is 'list' else val
+                val = self.stringify( val ) if type( val ) is dict else val
+                val = self.rotate( val )    if type( val ) is list else val
                 attr += ' %s="%s"' % ( self.key( key ), self.val( val ) )
             seen[key] = 1
 
