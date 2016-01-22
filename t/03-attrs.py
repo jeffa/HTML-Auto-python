@@ -26,13 +26,13 @@ class TestTags(unittest.TestCase):
         self.assertEqual( auto.rotate( list ), 'two', "returns 1st val" )
         self.assertEqual( list, [ 'three', 'one', 'two' ], "list rotated" )
 
-#    def test_simple_autos(self):
-#        auto = Attr( { 'foo': 'bar', 'baz': 'qux' }, 1 )
-#        self.assertEqual( ' baz="qux" foo="bar"', auto.__str__(),          "correct simple autos" )
-#
+    def test_simple_autos(self):
+        auto = Attr( { 'foo': 'bar', 'baz': 'qux' }, 1 )
+        self.assertEqual( auto.__str__(), ' baz="qux" foo="bar"',   "correct simple autos" )
+
 #    def test_rotate_autos(self):
 #        auto = Attr( { 'foo': ['bar','baz','qux'], 'baz': ['foo','qux'] }, 1 )
-#        self.assertEqual( ' baz="foo" foo="bar"', auto.__str__(),          "correct rotate autos 1" )
+#        self.assertEqual( auto.__str__(), ' baz="foo" foo="bar"',          "correct rotate autos 1" )
 #        self.assertEqual( ' baz="qux" foo="baz"', auto.__str__(),          "correct rotate autos 2" )
 #        self.assertEqual( ' baz="foo" foo="qux"', auto.__str__(),          "correct rotate autos 3" )
 #        self.assertEqual( ' baz="qux" foo="bar"', auto.__str__(),          "correct rotate autos 4" )

@@ -36,21 +36,29 @@ class Attr:
         self.sort   = sort
 
     def __str__( self ):
-        str = ''
-        return str
+        attr  = ''
+        seen = {}
+        keys = sorted( self.params.keys() ) if self.sort else self.params.keys()
+        for key in keys:
+            if not key in seen:
+                val = self.params[key]
+                val = stringify( val ) if type( val ) is 'dict' else val
+                val = rotate( val )    if type( val ) is 'list' else val
+                attr += ' %s="%s"' % ( self.key( key ), self.val( val ) )
+            seen[key] = 1
 
-    def key( self, str ):
-        str = re.sub( '\s+', '', str )
-        str = re.sub( '["\'>=\/]', '', str )
-        return str
+        return attr
 
-    def val( self, str ):
-        # scrub value
-        if re.match( '^\s+$', str ):
+    def key( self, key ):
+        key = re.sub( '\s+', '', key )
+        key = re.sub( '["\'>=\/]', '', key )
+        return key
+
+    def val( self, val ):
+        if re.match( '^\s+$', val ):
             return ''
-
-        str = re.sub( '"', '', str )
-        return str
+        val = re.sub( '"', '', val )
+        return val
 
     def rotate( self, array ):
         val = array.pop(0)
@@ -58,7 +66,6 @@ class Attr:
         return val
 
     def stringify( self, hash ):
-        # do the things
-        return "do the things!"
+        keys = sorted( self.params.keys() ) if self.sort else self.params.keys()
 
 
