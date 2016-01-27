@@ -37,10 +37,10 @@ class TestTags(unittest.TestCase):
         self.assertEqual( str( auto ), ' baz="foo" foo="qux"',          "correct rotate autos 3" )
         self.assertEqual( str( auto ), ' baz="qux" foo="bar"',          "correct rotate autos 4" )
         self.assertEqual( str( auto ), ' baz="foo" foo="baz"',          "correct rotate autos 5" )
-#
-#    def test_nested_autos(self):
-#        auto = Attr( { 'foo': { 'bar': 'baz', 'qux': 'foo' } }, 1 )
-#        self.assertEqual( ' foo="bar: baz; qux: foo;"', auto.__str__(),          "correct nested autos" )
+
+    def test_nested_autos(self):
+        auto = Attr( { 'foo': { 'bar': 'baz', 'qux': 'foo' } }, 1 )
+        self.assertEqual( ' foo="bar: baz; qux: foo;"', auto.__str__(),          "correct nested autos" )
 
 
 if __name__ == '__main__':

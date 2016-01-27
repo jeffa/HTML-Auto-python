@@ -65,7 +65,18 @@ class Attr:
         array.append( val )
         return val
 
-    def stringify( self, hash ):
-        keys = sorted( self.params.keys() ) if self.sort else self.params.keys()
+    def stringify( self, attrs ):
+        keys = sorted( attrs.keys() ) if self.sort else attrs.keys()
+        vals = []
+        for key in keys:
+            val = attrs[key]
+            if type( val ) is list:
+                val = self.rotate( val )
+            elif type( val ) is dict:
+                k = sorted( val.keys() ) if self.sort else val.keys()
+                val = k[0]
+            vals.append( '%s: %s' % ( key, val ) )
+        trail = ';' if len( vals ) else ''
+        return '; '.join( vals ) + trail
 
 
