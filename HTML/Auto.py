@@ -24,9 +24,9 @@ class Tag:
 
         # empty tag
         if 'cdata' not in params or not params['cdata']:
-            return '<' + tag + attr.__str__() + ' />'
+            return '<' + tag + str(attr) + ' />'
 
-        return '<' + tag + attr.__str__() + '>' + cdata + '</' + tag + '>'
+        return '<' + tag + str(attr) + '>' + cdata + '</' + tag + '>'
 
 
 class Attr:
