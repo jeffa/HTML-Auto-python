@@ -25,11 +25,12 @@ class TestTags(unittest.TestCase):
         auto = Tag()
         self.assertEqual( auto.tag( { 'tag': 'html' } ), '<html />',                "no cdata correct" )
         self.assertEqual( auto.tag( { 'tag': 'html', 'cdata': '' } ), '<html />',   "empty cdata correct" )
-        #self.assertEqual( auto.tag( { 'tag': 'html', 'cdata': ' ' } ), '<html />', "whitespace cdata correct" )
 
     def test_nonempty(self):
         auto = Tag()
-        self.assertEqual( auto.tag( { 'tag': 'p', 'cdata': '1' } ), '<p>1</p>',       "0 as cdata" )
+        self.assertEqual( auto.tag( { 'tag': 'p', 'cdata': 0 } ),       '<p>0</p>',       "0 (int) as cdata" )
+        self.assertEqual( auto.tag( { 'tag': 'p', 'cdata': '0' } ),     '<p>0</p>',       "0 (str) as cdata" )
+        self.assertEqual( auto.tag( { 'tag': 'html', 'cdata': ' ' } ),  '<html> </html>', "whitespace cdata correct" )
 
 
 if __name__ == '__main__':

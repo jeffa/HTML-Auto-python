@@ -16,15 +16,18 @@ class Tag:
     def tag( self, params={} ):
 
         tag   = params['tag']
-        cdata = params['cdata'] if 'cdata' in params else ''
+        cdata = str( params['cdata'] ) if 'cdata' in params else ''
         attr  = params['attr']  if 'attr'  in params else {}
 
         if not type( attr ) is 'Attr':
             attr = Attr( attr, self.sort )
 
         # empty tag
-        if 'cdata' not in params or not params['cdata']:
+        if not len( cdata ):
             return '<' + tag + str(attr) + ' />'
+
+        rendered       = ''
+        no_post_indent = 0
 
         return '<' + tag + str(attr) + '>' + cdata + '</' + tag + '>'
 
