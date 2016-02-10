@@ -19,7 +19,7 @@ class Tag:
         cdata = str( params['cdata'] ) if 'cdata' in params else ''
         attr  = params['attr']  if 'attr'  in params else {}
 
-        if not type( attr ) is 'Attr':
+        if not type( attr ) is Attr:
             attr = Attr( attr, self.sort )
 
         # empty tag
@@ -29,7 +29,37 @@ class Tag:
         rendered       = ''
         no_post_indent = 0
 
-        return '<' + tag + str(attr) + '>' + cdata + '</' + tag + '>'
+        if type( cdata ) is list:
+
+            if type( cdata[0] ) is dict:
+                self.level += 1
+                rendered = self.newline
+
+                for hash in cdata:
+                    rendered += self.tag({ 'tag': hash['tag'], 'attr': hash['attr'], 'cdata': hash['cdata'] })
+                
+                self.level -= 1
+            else:
+                string = ''
+                for scalar in cdata:
+                    string += self.tag({ 'tag': tag, 'attr': attr, 'cdata': scalar})
+                return string
+
+        elif type( cdata ) is dict:
+            self.level += 1
+            rendered = self.newline + tag({ 'tag': hash['tag'], 'attr': hash['attr'], 'cdata': hash['cdata'] })
+            self.level -= 1
+
+        else:
+            rendered = cdata #TODO: encoding happens here
+            no_post_indent = 1
+
+        indent = '' if no_post_indent else self.indent * self.level
+
+        return (self.indent * self.level) + \
+            '<' + tag + str( attr ) + '>' + \
+            str( rendered ) + indent + \
+            '</' + tag + '>' + self.newline
 
 
 class Attr:
