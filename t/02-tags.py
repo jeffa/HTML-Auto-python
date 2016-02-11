@@ -26,26 +26,37 @@ class TestTags(unittest.TestCase):
         self.assertEqual( auto.tag( { 'tag': 'html' } ), '<html />',                "no cdata correct" )
         self.assertEqual( auto.tag( { 'tag': 'html', 'cdata': '' } ), '<html />',   "empty cdata correct" )
 
+    def test_empty_attr(self):
+        auto = Tag()
+        self.assertEqual( auto.tag( { 'tag': 'foo', 'attr': { 'bar': 'qux' } } ), '<foo bar="qux" />', "no cdata with attr correct" )
+        self.assertEqual( auto.tag( { 'tag': 'foo', 'cdata': '', 'attr': { 'bar': 'qux' } } ), '<foo bar="qux" />',   "empty cdata with attr correct" )
+
     def test_nonempty(self):
         auto = Tag()
         self.assertEqual( auto.tag( { 'tag': 'p', 'cdata': 0 } ),       '<p>0</p>',       "0 (int) as cdata" )
         self.assertEqual( auto.tag( { 'tag': 'p', 'cdata': '0' } ),     '<p>0</p>',       "0 (str) as cdata" )
         self.assertEqual( auto.tag( { 'tag': 'html', 'cdata': ' ' } ),  '<html> </html>', "whitespace cdata correct" )
 
-        #self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': 1 } }), '<ol><li>1</li></ol>', "ol tag correct" )
-        #self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, { 'tag': 'li', 'cdata': 2 }] }), '<ol><li>1</li><li>2</li></ol>',  "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': '1' } }), '<ol><li>1</li></ol>', "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, { 'tag': 'li', 'cdata': 2 }] }), '<ol><li>1</li><li>2</li></ol>',  "ol tag correct" )
+
+    def test_nonempty_attr(self):
+        auto = Tag()
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': '1' }, 'attr': { 'class': 'ordered' } }), '<ol class="ordered"><li>1</li></ol>', "ol tag correct" )
+        attr = { 'class': [ 'odd', 'even' ] }
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1, 'attr': attr }, { 'tag': 'li', 'cdata': 2, 'attr': attr }] }), '<ol><li class="odd">1</li><li class="even">2</li></ol>',  "ol tag correct" )
 
     def test_indent(self):
         auto = Tag({ 'indent': '  ' })
-        #self.assertEqual( auto.tag({ 'tag': 'p', 'cdata': 0 }), "<p>0</p>\n", "paragraph tag correct" )
-        #self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': 1 } }), "<ol>\n  <li>1</li>\n</ol>\n", "ol tag correct" )
-        #self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, "<ol>\n  <li>1</li>\n  <li>2</li>\n</ol>\n", { 'tag': 'li', 'cdata': 2 }] }),  "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'p', 'cdata': 0 }), "<p>0</p>\n", "paragraph tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': 1 } }), "<ol>\n  <li>1</li>\n</ol>\n", "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, { 'tag': 'li', 'cdata': 2 }] }), "<ol>\n  <li>1</li>\n  <li>2</li>\n</ol>\n",  "ol tag correct" )
 
     def test_level(self):
         auto = Tag({ 'indent': ' ',  'level': 3 })
-        #self.assertEqual( "   <p>0</p>\n", auto.tag( 'tag': 'p', 'cdata': 0 ),  "paragraph tag correct" )
-        #self.assertEqual( "   <ol>\n    <li>1</li>\n   </ol>\n", auto.tag( 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': 1 } ),  "ol tag correct" )
-        #self.assertEqual( "   <ol>\n    <li>1</li>\n    <li>2</li>\n   </ol>\n", auto.tag( 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, { 'tag': 'li', 'cdata': 2 }] ),  "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'p', 'cdata': 0 }), "   <p>0</p>\n", "paragraph tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': { 'tag': 'li', 'cdata': 1 } }), "   <ol>\n    <li>1</li>\n   </ol>\n", "ol tag correct" )
+        self.assertEqual( auto.tag({ 'tag': 'ol', 'cdata': [{ 'tag': 'li', 'cdata': 1 }, { 'tag': 'li', 'cdata': 2 }] }), "   <ol>\n    <li>1</li>\n    <li>2</li>\n   </ol>\n", "ol tag correct" )
 
 
 if __name__ == '__main__':

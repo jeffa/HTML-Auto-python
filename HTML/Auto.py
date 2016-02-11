@@ -16,45 +16,46 @@ class Tag:
     def tag( self, params={} ):
 
         tag   = params['tag']
-        cdata = str( params['cdata'] ) if 'cdata' in params else ''
+        cdata = params['cdata'] if 'cdata' in params else ''
         attr  = params['attr']  if 'attr'  in params else {}
+
+        ctype     = type( cdata )
+        rendered  = ''
+        no_indent = 0
 
         if not type( attr ) is Attr:
             attr = Attr( attr, self.sort )
 
-        # empty tag
-        if not len( cdata ):
-            return '<' + tag + str(attr) + ' />'
-
-        rendered       = ''
-        no_post_indent = 0
-
-        if type( cdata ) is list:
+        if ctype is list:
 
             if type( cdata[0] ) is dict:
                 self.level += 1
                 rendered = self.newline
 
                 for hash in cdata:
-                    rendered += self.tag({ 'tag': hash['tag'], 'attr': hash['attr'], 'cdata': hash['cdata'] })
+                    rendered += self.tag( hash )
                 
                 self.level -= 1
             else:
                 string = ''
                 for scalar in cdata:
-                    string += self.tag({ 'tag': tag, 'attr': attr, 'cdata': scalar})
+                    string += self.tag({ 'tag': tag, 'attr': attr, 'cdata': scalar })
                 return string
 
-        elif type( cdata ) is dict:
+        elif ctype is dict:
             self.level += 1
-            rendered = self.newline + tag({ 'tag': hash['tag'], 'attr': hash['attr'], 'cdata': hash['cdata'] })
+            rendered = self.newline + self.tag( cdata )
             self.level -= 1
 
         else:
-            rendered = cdata #TODO: encoding happens here
-            no_post_indent = 1
+            # empty tag
+            if not len( str( cdata ) ):
+                return '<' + tag + str(attr) + ' />'
 
-        indent = '' if no_post_indent else self.indent * self.level
+            rendered = cdata #TODO: encoding happens here
+            no_indent = 1
+
+        indent = '' if no_indent else self.indent * self.level
 
         return (self.indent * self.level) + \
             '<' + tag + str( attr ) + '>' + \
