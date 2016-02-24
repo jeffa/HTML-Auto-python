@@ -1,6 +1,6 @@
 HTML-Auto (python)
 =====================
-Just another HTML tag generator for Python.
+Just another HTML tag generator for Python.  [![pypi package](https://badge.fury.io/py/HTML-Auto.svg)](https://pypi.python.org/pypi/HTML-Auto) [![Build Status](https://api.travis-ci.org/jeffa/HTML-Auto-python.svg?branch=master)](https://travis-ci.org/jeffa/HTML-Auto-python)
 
 Description
 -----------
