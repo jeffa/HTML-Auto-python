@@ -27,6 +27,43 @@ print(
         'cdata': [ list(map((lambda d: { 'tag': 'li', 'attr': attr, 'cdata': d }), [1,2,3,4,5])) ]
     })
 )
+
+tr_attr = { 'class': [ 'odd', 'even' ] }
+print(
+    auto.tag({
+        'tag': 'table',
+        'attr': { 'class': 'spreadsheet' },
+        'cdata': [
+            {
+                'tag': 'tr',
+                'attr': tr_attr,
+                'cdata': {
+                    'tag': 'th',
+                    'attr': { 'style': { 'color': [ 'red', 'green' ] } },
+                    'cdata': [ 'one', 'two', 'three' ],
+                },
+            },
+            {
+                'tag': 'tr',
+                'attr': tr_attr,
+                'cdata': {
+                    'tag': 'td',
+                    'attr': { 'style': { 'color': [ 'orange', 'blue' ] } },
+                    'cdata': [ 'four', 'five', 'six' ],
+                },
+            },
+            {
+                'tag': 'tr',
+                'attr': tr_attr,
+                'cdata': {
+                    'tag': 'td',
+                    'attr': { 'style': { 'color': [ 'red', 'green' ] } },
+                    'cdata': [ 'seven', 'eight', 'nine' ],
+                },
+            },
+        ]
+    })
+)
 ```
 
 Also includes HTML.Auto.Attr which provides rotating attributes.
