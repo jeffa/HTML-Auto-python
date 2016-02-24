@@ -13,12 +13,36 @@ from HTML.Auto import Tag
 
 auto = Tag()
 print( auto.tag({ 'tag': 'li', 'cdata': 'item', 'attr': { 'class': 'foo' } }) )
+
+print( auto.tag({ 'tag': 'hr' }) )
+print( auto.tag({ 'tag': 'h1', 'cdata': 'heading' }) )
+print( auto.tag({ 'tag': 'p', 'cdata': 'paragraph', 'attr': { 'class': 'para' } }) )
+
+auto = Tag({ 'indent': '    ' })
+attr = { 'style': { 'color': [ 'red', 'green' ] } }
+print(
+    auto.tag({
+        'tag': 'ol',
+        'attr': { 'reversed': 'reversed' },
+        'cdata': [ list(map((lambda d: { 'tag': 'li', 'attr': attr, 'cdata': d }), [1,2,3,4,5])) ]
+    })
+)
+```
+
+Also includes HTML.Auto.Attr which provides rotating attributes.
+```python
+from HTML.Auto import Attr
+
+auto = Attr({ 'foo': ['bar','baz','qux'] })
+
+for i in range(4):
+    print( str( auto ) ) 
 ```
 
 Installation
 ------------
 ```
-python setup.py install
+pip install HTML-Auto
 ```
 
 License and Copyright
