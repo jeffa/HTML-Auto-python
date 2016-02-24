@@ -10,15 +10,12 @@ Synopsis
 --------
 ```python
 from HTML.Auto import Tag
-
-auto = Tag()
-print( auto.tag({ 'tag': 'li', 'cdata': 'item', 'attr': { 'class': 'foo' } }) )
+auto = Tag({ 'indent': '    ' })
 
 print( auto.tag({ 'tag': 'hr' }) )
 print( auto.tag({ 'tag': 'h1', 'cdata': 'heading' }) )
 print( auto.tag({ 'tag': 'p', 'cdata': 'paragraph', 'attr': { 'class': 'para' } }) )
 
-auto = Tag({ 'indent': '    ' })
 attr = { 'style': { 'color': [ 'red', 'green' ] } }
 print(
     auto.tag({
