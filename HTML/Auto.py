@@ -129,27 +129,45 @@ class Table:
     def south( *args ):
         generate( *args, 'theta', -180, 'tgroups', 0, 'pinhead', 1 )
 
-    def __init__( self, *params ):
-        self.params = params
-#        (args[0] || []).each do |key,val|
-#            self.instance_eval { class << self; self end }.send(:attr_accessor, key)
-#            self.send( "#{key}=", val )
+    def __init__( *args ):
+        1
 
     def generate( self, *args ):
         params = self._process( args )
 
-        return "<table>"
+        return self._make_table( params )
 
     def _make_table( self, params ):
         cdata = []
+        return params['auto'].tag({ 'tag': 'table' })
 
-    def _process( self, args ):
+    def _process( self, *args ):
         params = self._args( args )
         return params
 
-    def _args( self, things ):
+    def _args( self, *things ):
         data = []
         args = []
 
+        if things is list:
+            while things.size:
+                print( things.pop() )
+
+        elif things is dict:
+            print( 'dict' )
+
+        else:
+            print( type( things ) )
+
         params = {}
+        params['indent'] = ''
+        params['level']  = 0
+        params['attr_sort'] = 0
+
+        params['auto'] = Tag({
+            'indent': params['indent'],
+            'level': params['level'],
+            'sort': params['attr_sort']
+        })
+
         return params
