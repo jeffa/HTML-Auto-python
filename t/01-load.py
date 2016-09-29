@@ -1,6 +1,7 @@
 import unittest
 from HTML.Auto import Tag
 from HTML.Auto import Attr
+from HTML.Auto import Table
 
 class TestLoad(unittest.TestCase):
 
@@ -23,6 +24,9 @@ class TestLoad(unittest.TestCase):
 
     def test_attr(self):
         self.assertTrue( Attr() )
+
+    def test_table(self):
+        self.assertTrue( Table() )
 
 if __name__ == '__main__':
     unittest.main()

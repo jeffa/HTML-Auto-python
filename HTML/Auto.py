@@ -114,3 +114,12 @@ class Attr:
         return '; '.join( vals ) + trail
 
 
+class Table:
+
+    def __init__( self, *params ):
+        self.params = params
+
+    def generate( self, *attrs ):
+        return "<table>"
+
+
