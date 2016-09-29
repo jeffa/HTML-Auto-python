@@ -116,10 +116,40 @@ class Attr:
 
 class Table:
 
+    def portrait( *args ):
+        generate( *args, 'theta', 0 )
+    def landscape( *args ):
+        generate( *args, 'theta', -270, 'tgroups', 0 )
+    def north( *args ):
+        generate( *args, 'theta', 0 )
+    def west( *args ):
+        generate( *args, 'theta', -270, 'tgroups', 0 )
+    def east( *args ):
+        generate( *args, 'theta',   90, 'tgroups', 0, 'pinhead', 1 )
+    def south( *args ):
+        generate( *args, 'theta', -180, 'tgroups', 0, 'pinhead', 1 )
+
     def __init__( self, *params ):
         self.params = params
+#        (args[0] || []).each do |key,val|
+#            self.instance_eval { class << self; self end }.send(:attr_accessor, key)
+#            self.send( "#{key}=", val )
 
-    def generate( self, *attrs ):
+    def generate( self, *args ):
+        params = self._process( args )
+
         return "<table>"
 
+    def _make_table( self, params ):
+        cdata = []
 
+    def _process( self, args ):
+        params = self._args( args )
+        return params
+
+    def _args( self, things ):
+        data = []
+        args = []
+
+        params = {}
+        return params
