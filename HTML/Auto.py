@@ -116,22 +116,6 @@ class Attr:
 
 class Table:
 
-    def portrait( *args ):
-        generate( *args, 'theta', 0 )
-    def landscape( *args ):
-        generate( *args, 'theta', -270, 'tgroups', 0 )
-    def north( *args ):
-        generate( *args, 'theta', 0 )
-    def west( *args ):
-        generate( *args, 'theta', -270, 'tgroups', 0 )
-    def east( *args ):
-        generate( *args, 'theta',   90, 'tgroups', 0, 'pinhead', 1 )
-    def south( *args ):
-        generate( *args, 'theta', -180, 'tgroups', 0, 'pinhead', 1 )
-
-    def __init__( *args ):
-        1
-
     def generate( self, *args ):
         params = self._process( *args )
 
