@@ -1,4 +1,2 @@
-PYTHONPATH=. python -B t/01-load.py
-PYTHONPATH=. python -B t/02-tags.py
-PYTHONPATH=. python -B t/03-attrs.py
-PYTHONPATH=. python -B t/04-table.py
+export PYTHONPATH=.:../HTML-Auto-python/
+ls t/*.py | xargs -n1 python -B
