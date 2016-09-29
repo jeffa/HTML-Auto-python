@@ -24,8 +24,14 @@ class TestTable(unittest.TestCase):
 
         self.assertEqual(
             html,
-            gen.generate({ 'data': data }),
+            gen.generate({ 'data': data, 'foo': 'bar' }),
             "one named arg"
+        )
+
+        self.assertEqual(
+            html,
+            gen.generate( 'data', data, 'foo', 'bar' ),
+            "multiple arg"
         )
 
 #    def test_class(self):

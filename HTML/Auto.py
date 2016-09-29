@@ -133,7 +133,7 @@ class Table:
         1
 
     def generate( self, *args ):
-        params = self._process( args )
+        params = self._process( *args )
 
         return self._make_table( params )
 
@@ -142,32 +142,35 @@ class Table:
         return params['auto'].tag({ 'tag': 'table' })
 
     def _process( self, *args ):
-        params = self._args( args )
+        params = self._args( *args )
         return params
 
-    def _args( self, *things ):
+    def _args( self, *thingy ):
         data = []
-        args = []
+        args = {}
 
-        if things is list:
-            while things.size:
-                print( things.pop() )
+        things = list( thingy )
+        while things:
+            thing = things.pop(0)
+            if type( thing ) is list:
+                if type( thing[0] ) is list:
+                    data = thing
+                else:
+                    data.append( thing )
+            elif type(thing) is dict:
+                data = thing.pop( 'data', None )
+                args = thing
+            else:
+                if thing is 'data':
+                    data = things.pop(0)
+                else:
+                    args[thing] = things.pop(0)
 
-        elif things is dict:
-            print( 'dict' )
-
-        else:
-            print( type( things ) )
-
-        params = {}
-        params['indent'] = ''
-        params['level']  = 0
-        params['attr_sort'] = 0
-
-        params['auto'] = Tag({
-            'indent': params['indent'],
-            'level': params['level'],
-            'sort': params['attr_sort']
+        args['auto'] = Tag({
+            'indent': args.get( 'indent', '' ),
+            'level': args.get( 'level', 0 ),
+            'sort': args.get( 'attr_sort', 0 )
         })
 
-        return params
+        self.data = data
+        return args
