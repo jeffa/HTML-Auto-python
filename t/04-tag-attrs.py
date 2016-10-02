@@ -24,6 +24,17 @@ class TestTagAttrs(unittest.TestCase):
             'colgroup tag correct'
         )
 
+        self.assertEqual(
+            '<colgroup span="3"><col /></colgroup>',
+            auto.tag( {'attr': {'span': 3}, 'cdata': [{'attr': {}, 'tag': 'col'}], 'tag': 'colgroup'} ),
+            'colgroup tag correct'
+        )
+
+        self.assertEqual(
+            '<colgroup span="3"><col /><col /></colgroup>',
+            auto.tag( {'attr': {'span': 3}, 'cdata': [{'attr': {}, 'tag': 'col'},{'attr': {}, 'tag': 'col'}], 'tag': 'colgroup'} ),
+            'colgroup tag correct'
+        )
 
 if __name__ == '__main__':
     unittest.main()
