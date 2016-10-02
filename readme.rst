@@ -20,10 +20,13 @@ tags
 Generate HTML tags with ease (HTML4, HTML5, XHTML and SVG).
 
     from HTML.Auto import Tag
+
     auto = Tag({ 'indent': '    ' })
 
     print( auto.tag({ 'tag': 'hr' }) )
+
     print( auto.tag({ 'tag': 'h1', 'cdata': 'heading' }) )
+
     print( auto.tag({ 'tag': 'p', 'cdata': 'paragraph', 'attr': { 'class': 'para' } }) )
 
 attributes
