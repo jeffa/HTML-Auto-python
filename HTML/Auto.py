@@ -270,8 +270,8 @@ class Encoder:
 
         self.char2entity = {}
         for k, v in self.entity2char.items():
-            self.char2entity[v] = '&{};'.format(k)
+            self.char2entity[v] = '&' + str(k) + ';'
 
         for i in range(255):
             if chr(i) not in self.char2entity:
-                self.char2entity[ chr(i) ] = '&#{};'.format(i)
+                self.char2entity[ chr(i) ] = '&#' + str(i) + ';'
