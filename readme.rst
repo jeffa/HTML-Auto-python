@@ -35,12 +35,19 @@ attributes
 Also includes HTML.Auto.Attr which provides rotating attributes.
 
     attr = { 'style': { 'color': [ 'red', 'green' ] } }
+
     print(
+
         auto.tag({
+
             'tag': 'ol',
+
             'attr': { 'reversed': 'reversed' },
+
             'cdata': [ list(map((lambda d: { 'tag': 'li', 'attr': attr, 'cdata': d }), [1,2,3,4,5])) ]
+
         })
+
     )
 
 development
