@@ -1,6 +1,7 @@
 Revision history for HTML-Auto-python
 
 0.0.2
+    - fixed bug: run time error if attribute values of type integer
 
 0.0.1
     - First version, released on an unsuspecting world.

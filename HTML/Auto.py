@@ -89,6 +89,7 @@ class Attr:
         return key
 
     def val( self, val ):
+        val = str( val )
         if re.match( '^\s+$', val ):
             return ''
         val = re.sub( '"', '', val )
