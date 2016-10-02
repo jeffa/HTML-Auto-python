@@ -18,18 +18,17 @@ class TestTagAttrs(unittest.TestCase):
             encoder.encode( '&<>"\'', '' ),
             'encodes when chars is empty'
         )
-        return
-
-        self.assertEqual(
-            'hell&#48;',
-            encoder.encode( 'hell0', 0 ),
-            'zero encodes correctly'
-        )
 
         self.assertEqual(
             'h&#101;llo',
             encoder.encode( 'hello', 'e' ),
             'requested chars encoded correctly'
+        )
+
+        self.assertEqual(
+            'hell&#48;',
+            encoder.encode( 'hell0', 0 ),
+            'zero encodes correctly'
         )
 
         self.assertEqual(
@@ -71,15 +70,8 @@ class TestTagAttrs(unittest.TestCase):
         )
 
     def test_numeric(self):
-        return
 
         encoder = Encoder()
-
-        self.assertEqual(
-            '&#x26;',
-            encoder.num_entity( '&' ),
-            'char encoded numerically correctly'
-        )
 
         self.assertEqual(
             '&#x26;&#x3C;&#x3E;&#x22;&#x27;',

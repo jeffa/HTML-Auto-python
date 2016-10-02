@@ -1,5 +1,6 @@
 import re
 from cgi import escape
+from struct import unpack
 
 __version__='0.0.2'
 
@@ -116,47 +117,38 @@ class Attr:
 
 class Encoder:
 
-#    def encode( string, *args )
-#
-#        if (! args[0].nil? and ! args[0].to_s.empty?)
-#            lookup = {}
-#            args[0].to_s.each_char{ |c|
-#                lookup[c] = @char2entity[c].nil? ? num_entity(c) : @char2entity[c]
-#            }
-#            string = string.to_s.gsub( /./ ) {|c| lookup[c].nil? ? c : lookup[c] }
-#        else             
-#            # Encode control chars, high bit chars and '<', '&', '>', ''' and '"'
-#            string = string.to_s.gsub( /([^\n\r\t !\#\$%\(-;=?-~])/ ) {|c| 
-#                @char2entity[c].nil? ? num_entity(c) : @char2entity[c]
-#            }
-#
-#        return string
-#
-#    def encode_hex( *args )
-#        tmp = @char2entity
-#        @char2entity = {}
-#        string = encode( *args )
-#        @char2entity = tmp
-#        return string
-#
-
     def encode( self, string, *args):
 
         def num_entity(char):
-            print( "num = ", char )
-            return char
-            #return sprintf( '&#x%X;', char.unpack('C')[0] )
+            hex = unpack( 'B', bytes( char, 'utf_8' ) )[0] 
+            return '&#x%X;' % hex
 
-        def charrepl(matchobj):
-            if matchobj.group(0) in self.char2entity: return self.char2entity[ matchobj.group(0) ]
-            else: return num_entity( matchobj.group(0) )
+        def default(m):
+            if m.group(0) in self.char2entity: return self.char2entity[ m.group(0) ]
+            else: return num_entity( m.group(0) )
+
 
         if args and len(str(args[0])):
-            print( 'arg: ', args[0] )
+            lookup = {}
+            def custom(m):
+                if m.group(0) in lookup: return lookup[ m.group(0) ]
+                else: return m.group(0)
+
+            for c in str( args[0] ):
+                lookup[c] = num_entity(c) if not c in self.char2entity else self.char2entity[c]
+            string = re.sub( r'.', custom, string )
         else:
             # Encode control chars, high bit chars and '<', '&', '>', ''' and '"'
-            string = re.sub( r"([^\n\r\t !\#\$%\(-;=?-~])", charrepl, string )
+            string = re.sub( r"([^\n\r\t !\#\$%\(-;=?-~])", default, string )
 
+        return string
+
+
+    def encode_hex( self, *args ):
+        tmp = self.char2entity
+        self.char2entity = {}
+        string = self.encode( *args )
+        self.char2entity = tmp
         return string
 
     def __init__(self):
