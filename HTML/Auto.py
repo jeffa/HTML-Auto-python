@@ -120,8 +120,11 @@ class Encoder:
     def encode( self, string, *args):
 
         def num_entity(char):
-            hex = unpack( 'B', bytes( char, 'utf_8' ) )[0] 
-            return '&#x%X;' % hex
+            try:
+                hex = unpack( 'B', bytes( char, 'utf_8' ) )
+            except TypeError:
+                hex = unpack( 'B', bytes( char ) )
+            return '&#x%X;' % hex[0]
 
         def default(m):
             if m.group(0) in self.char2entity: return self.char2entity[ m.group(0) ]
