@@ -89,11 +89,8 @@ class Attr:
         return key
 
     def val( self, val ):
-        val = str( val )
-        if re.match( '^\s+$', val ):
-            return ''
-        val = re.sub( '"', '', val )
-        return val
+        val = re.sub( '"', '', '{}'.format(val) )
+        return val.strip()
 
     def rotate( self, array ):
         val = array.pop(0)

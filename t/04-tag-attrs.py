@@ -19,8 +19,8 @@ class TestTagAttrs(unittest.TestCase):
         )
 
         self.assertEqual(
-            '<colgroup span="3">0</colgroup>',
-            auto.tag( { 'tag': 'colgroup', 'attr': { 'span': 3 }, 'cdata': 0 } ),
+            '<colgroup span="0">0</colgroup>',
+            auto.tag( { 'tag': 'colgroup', 'attr': { 'span': 0 }, 'cdata': 0 } ),
             'colgroup tag correct'
         )
 
