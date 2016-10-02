@@ -89,7 +89,8 @@ class Attr:
         return key
 
     def val( self, val ):
-        val = re.sub( '"', '', '{}'.format(val) )
+        val = str(val)
+        val = re.sub( '"', '', val )
         return val.strip()
 
     def rotate( self, array ):
