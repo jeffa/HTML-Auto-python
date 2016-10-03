@@ -1,5 +1,7 @@
 Revision history for HTML-Auto-python
 
+0.0.3
+
 0.0.2
     - added encoding for ASCII chars
     - fixed bug: run time error if attribute values of type integer
