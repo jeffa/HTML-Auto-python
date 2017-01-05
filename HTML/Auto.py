@@ -2,7 +2,7 @@ import re
 from cgi import escape
 from struct import unpack
 
-__version__='0.0.3'
+__version__='0.0.4'
 
 class Tag:
 
