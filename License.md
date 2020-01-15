@@ -1,4 +1,4 @@
-Copyright 2017 Jeff Anderson
+Copyright 2020 Jeff Anderson
 ================================
 
 MIT License
