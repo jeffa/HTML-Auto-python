@@ -1,2 +1,4 @@
 HTML_Auto.egg-info/
 dist/
+HTML/__pycache__/
+build/

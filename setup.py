@@ -19,10 +19,5 @@ setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: Artistic License",
     ],
-    long_description="""\
-    Just another HTML tag generator.
-    --------------------------------
-
-    Generate HTML tags with ease (HTML4, XHTML and HTML5).
-"""
+    long_description="Generate HTML tags with ease (HTML4, XHTML and HTML5)."
 )
